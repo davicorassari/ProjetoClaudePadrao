@@ -1,0 +1,109 @@
+name: youtube-viral-machine
+title: YouTube Viral Machine
+description: >
+  Transforma vídeos do YouTube em cortes virais e publica automaticamente em
+  Reels, TikTok, YouTube Shorts, Kwai, Threads e X — com estratégia de
+  monetização integrada baseada em evidências científicas.
+version: "1.0"
+performance_mode: econômico
+language: pt-BR
+author: Davi
+
+agents:
+  - id: vitor-viral
+    name: Vitor Viral
+    icon: 🎬
+    file: agents/vitor-viral/vitor-viral.agent.md
+
+  - id: carlos-corte
+    name: Carlos Corte
+    icon: ✂️
+    file: agents/carlos-corte/carlos-corte.agent.md
+
+  - id: paula-post
+    name: Paula Post
+    icon: 📝
+    file: agents/paula-post/paula-post.agent.md
+
+  - id: roberto-reach
+    name: Roberto Reach
+    icon: 📱
+    file: agents/roberto-reach/roberto-reach.agent.md
+
+  - id: monica-monetiza
+    name: Mônica Monetiza
+    icon: 💰
+    file: agents/monica-monetiza/monica-monetiza.agent.md
+
+pipeline:
+  - step: 1
+    type: checkpoint
+    title: "Informe o vídeo YouTube"
+    file: pipeline/steps/step-01-checkpoint-url.md
+
+  - step: 2
+    type: agent
+    agent: vitor-viral
+    title: "Caça os momentos virais"
+    execution: subagent
+    inputFile: squads/youtube-viral-machine/output/video-input.md
+    tasks:
+      - tasks/hunt-viral-moments.md
+
+  - step: 3
+    type: checkpoint
+    title: "Selecione os clipes para cortar"
+    file: pipeline/steps/step-03-checkpoint-select-clips.md
+
+  - step: 4
+    type: agent
+    agent: carlos-corte
+    title: "Corta clipes e adiciona legendas"
+    execution: subagent
+    inputFile: squads/youtube-viral-machine/output/selected-clips.md
+    tasks:
+      - tasks/cut-and-subtitle.md
+
+  - step: 5
+    type: agent
+    agent: paula-post
+    title: "Escreve captions para todas as plataformas"
+    execution: inline
+    inputFile: squads/youtube-viral-machine/output/clips-ready.md
+    tasks:
+      - tasks/write-captions.md
+
+  - step: 6
+    type: checkpoint
+    title: "Aprovação de conteúdo antes de publicar"
+    file: pipeline/steps/step-06-checkpoint-approve.md
+    on_reject: step-5
+
+  - step: 7
+    type: agent
+    agent: roberto-reach
+    title: "Publica em todas as plataformas"
+    execution: subagent
+    inputFile: squads/youtube-viral-machine/output/approved-content.md
+    tasks:
+      - tasks/publish-all.md
+
+  - step: 8
+    type: agent
+    agent: monica-monetiza
+    title: "Relatório de monetização"
+    execution: inline
+    tasks:
+      - tasks/monetize-report.md
+
+skills:
+  - web_search
+  - web_fetch
+
+data:
+  - pipeline/data/research-brief.md
+  - pipeline/data/domain-framework.md
+  - pipeline/data/quality-criteria.md
+  - pipeline/data/output-examples.md
+  - pipeline/data/anti-patterns.md
+  - pipeline/data/tone-of-voice.md
