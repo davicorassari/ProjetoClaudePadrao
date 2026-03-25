@@ -1,0 +1,6 @@
+id,name,icon,role,execution,file
+vitor-viral,Vitor Viral,🎬,Caçador de Momentos Virais,subagent,agents/vitor-viral/vitor-viral.agent.md
+carlos-corte,Carlos Corte,✂️,Editor de Clipes Virais,subagent,agents/carlos-corte/carlos-corte.agent.md
+paula-post,Paula Post,📝,Copywriter Multi-Plataforma,inline,agents/paula-post/paula-post.agent.md
+roberto-reach,Roberto Reach,📱,Publicador Universal,subagent,agents/roberto-reach/roberto-reach.agent.md
+monica-monetiza,Mônica Monetiza,💰,Estrategista de Receita,inline,agents/monica-monetiza/monica-monetiza.agent.md
